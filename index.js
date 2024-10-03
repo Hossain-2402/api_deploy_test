@@ -1,7 +1,7 @@
 import express from 'express';
 const app = express();
 const port = process.env.PORT || 5000;
-const router = express.Router();
+const router = express();
 import cors from 'cors';
 import {connectDB} from './db.js';
 import Product from "./models/product.model.js";
