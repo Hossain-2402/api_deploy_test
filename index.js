@@ -1,6 +1,7 @@
 import express from 'express';
 const app = express();
 const port = process.env.PORT || 5000;
+const router = express.Router();
 import cors from 'cors';
 import {connectDB} from './db.js';
 import Product from "./models/product.model.js";
@@ -14,12 +15,12 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Headers", "*");
   next();}); // CORS middle-ware
 
-app.get('/api/', (req, res) => {
+router.get('/api/', (req, res) => {
   res.status(200).json({
   	message : "alskjdlkak alksdj lkaj sdlkjlja skj jlkajsdlkjalscdklj klj askdj kj asldjk  kjdlkj askdj lkj fsj klakj sdkj ne jalksdn kjd sakj id lkjas dkj aslkdj vsdlkj if you feel confident about the thing that you are doing then relay on allah and be confident and yes, never forget to seek confidence from almighty allah"});
 });
 
-app.post('/api/products', (req, res) => {
+router.post('/api/products', (req, res) => {
   const new_product = req.body;
   const new_item = new Product(new_product);
 
@@ -38,7 +39,7 @@ app.post('/api/products', (req, res) => {
 
 });
 
-app.get('/api/products',(req,res)=>{
+router.get('/api/products',(req,res)=>{
   Product.find()
   .then(result=>{
     res.status(200).json(result);
@@ -48,7 +49,7 @@ app.get('/api/products',(req,res)=>{
   })
 });
 
-app.delete('/api/products/:id',(req,res)=>{
+router.delete('/api/products/:id',(req,res)=>{
   const {id} = req.params;
 
   Product.findByIdAndDelete(id)
@@ -60,7 +61,7 @@ app.delete('/api/products/:id',(req,res)=>{
   })
 });
 
-app.patch('/api/products/:id',(req,res)=>{
+router.patch('/api/products/:id',(req,res)=>{
   const {id} = req.params;
 
   const updated_product = req.body;
